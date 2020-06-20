@@ -15,9 +15,9 @@ pub fn encode<T: AsRef<[u8]>>(input: T) -> String {
 
     const LOW_SIX_BITS: u8 = 0x3F;
 
-    /// The final quantum of encoding input is an integral multiple of 24
-    /// bits; here, the final unit of encoded output will be an integral
-    /// multiple of 4 characters with no "=" padding.
+    // The final quantum of encoding input is an integral multiple of 24
+    // bits; here, the final unit of encoded output will be an integral
+    // multiple of 4 characters with no "=" padding.
     while input_index < incomplete_chunks_index {
         let input_chunk = &input[input_index..(input_index + 3)];
         let output_chunk = &mut output_buf[output_index..(output_index + 4)];
@@ -40,9 +40,9 @@ pub fn encode<T: AsRef<[u8]>>(input: T) -> String {
     }
 
     if incomplete_chunks_len == 1 {
-        /// The final quantum of encoding input is exactly 8 bits; here, the
-        /// final unit of encoded output will be two characters followed by
-        /// two "=" padding characters.
+        // The final quantum of encoding input is exactly 8 bits; here, the
+        // final unit of encoded output will be two characters followed by
+        // two "=" padding characters.
         output_buf[output_index] = BASE64_TABLE[
             (input[incomplete_chunks_index] >> 2) as usize
         ];
@@ -53,9 +53,9 @@ pub fn encode<T: AsRef<[u8]>>(input: T) -> String {
         output_buf[output_index + 3] = b'=';
         output_index += 4;
     } else if incomplete_chunks_len == 2 {
-        /// The final quantum of encoding input is exactly 16 bits; here, the
-        /// final unit of encoded output will be three characters followed by
-        /// one "=" padding character.
+        // The final quantum of encoding input is exactly 16 bits; here, the
+        // final unit of encoded output will be three characters followed by
+        // one "=" padding character.
         output_buf[output_index] = BASE64_TABLE[
             (input[incomplete_chunks_index] >> 2) as usize
         ];
