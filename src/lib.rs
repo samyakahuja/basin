@@ -1,6 +1,4 @@
 mod encode;
-mod decode;
-
 pub use crate::encode::encode;
 
 const BASE64_TABLE: [u8; 64] = [
